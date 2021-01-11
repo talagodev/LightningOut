@@ -15,7 +15,13 @@
         const urlParams = new URLSearchParams(window.location.search);
         if(urlParams.get("dealer")) {
             componentAttributes.dealer = urlParams.get("dealer")
-        }   
+        }  
+                if(urlParams.get("source")) {
+            componentAttributes.dealer = urlParams.get("source")
+        }  
+                if(urlParams.get("assetType")) {
+            componentAttributes.dealer = urlParams.get("assetType")
+        }  
         
         $Lightning.use(
             appName,
