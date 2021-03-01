@@ -1,0 +1,41 @@
+<html>
+    <script src="https://portal-vendorfinance.force.com/dealers/lightning/lightning.out.js"></script> <!-- Community URL + "/lightning/lightning.out.js" Ensure usrl is expressed as https// -->
+
+    <div data-lightning-out="true"></div>
+
+    <script type="module">
+        const appName = "c:ShortForm"; // Aura Dependecy App 
+        const componentName = "c:applicationShortForm"; // LWC name
+        const lightningEndpoint = "https://portal-vendorfinance.force.com/dealers"; // Community URL WITHOUT final "/" Ensuring is https://
+        const targetElement = document.querySelector("[data-lightning-out]");
+        const componentAttributes = {  // Must be present. Leave empty tags if no attributes. Attributes names as per LWC (ensure @api enabled in LWC).
+          source: "Website Personal"
+        };
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get("dealer")) {
+            componentAttributes.dealer = urlParams.get("dealer")
+        }  
+        if(urlParams.get("source")) {
+            componentAttributes.source = urlParams.get("source")
+        }  
+        if(urlParams.get("assetType")) {
+            componentAttributes.assetType = urlParams.get("assetType")
+        }  
+        
+        $Lightning.use(
+            appName,
+            function () {
+                $Lightning.createComponent(
+                    componentName,
+                    componentAttributes,
+                    targetElement,
+                    function (cmp) {
+                        console.log("Lightning component created");
+                    }
+                );
+            },
+            lightningEndpoint
+        );
+    </script>
+</html>
